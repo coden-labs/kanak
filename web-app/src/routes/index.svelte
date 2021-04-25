@@ -3,44 +3,101 @@
 </script>
 
 <Head page_title="Home" />
-
-<!-- This example requires Tailwind CSS v2.0+ -->
-<div class="relative bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-      <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-
-        <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-          <div class="sm:text-center lg:text-left">
-            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-              <span class="block xl:inline">kanak</span>
-              <span class="block text-indigo-600 xl:inline">A Personal Finance Tracker</span>
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h2 class="text-xs text-red-500 tracking-widest font-medium title-font mb-1">
+                Your Personal Finance Tracker
+            </h2>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+                kanak
             </h1>
-            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Kanak is an app that combines, expense management and finance tracking. Answer the following questions
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+                kanak.io is a finance tracker I am creating for myself. This combines into a single
+                application, expense management and finance tracking. This app will likely not work
+                for you. This is also a test-bed for technologies I am interested in.
             </p>
-                <ul class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-">
-                    <li>How much was my expenses this month?</li>
-                    <li>How did my bitcoin portfolio do this year?</li>
-                    <li>Given I get a tax benefit for my ISA, does it perform better than my regular Mutual Funds?</li>
-                    <li>Given the money I spend on upkeep of my rental property, is it worth it?</li>
-                </ul>
-
-                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                    Additionally we employ extreme data minimisation, and client side encryption. So the amount of data, we have
-                    about you is minimal
+        </div>
+        <div class="flex flex-wrap">
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                    Investment Tracking
+                </h2>
+                <p class="leading-relaxed text-base mb-4">
+                    Track how your investments are doing, answer simple to ask but actually hard
+                    to answer questions like,
                 </p>
-            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-              <div class="rounded-md shadow">
-                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
-                  Get Started
+                <ol>
+                    <li>How did my investments do over the past year?</li>
+                    <li>In my tax siutation did X with tax benefits or Y without net more?</li>
+                    <li>What is the real returns on my rented out property net of expense?</li>
+                </ol>
+                <!-- svelte-ignore a11y-missing-attribute -->
+                <a class="text-red-500 inline-flex items-center">
+                    Learn More
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
                 </a>
-              </div>
             </div>
-          </div>
-        </main>
-      </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                    Client Side Encryption
+                </h2>
+                <p class="leading-relaxed text-base mb-4">
+                    All your financial data (other than <em>Shared Documents</em>) is client side
+                    encrypted, and for any live market data we need to fetch we employ zero tracking.
+                    <br />
+                    We believe in extreme data minimisation, because financial data isn't an asset,
+                    it is a liability that we do NOT want to leak. So if we do NOT have your data,
+                    we can NOT leak your data.
+                </p>
+                <!-- svelte-ignore a11y-missing-attribute -->
+                <a class="text-red-500 inline-flex items-center">
+                    Learn More
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                    Shared Documents
+                </h2>
+                <p class="leading-relaxed text-base mb-4">
+                    Ensure your family or friends have access to your financial documents in case
+                    something terrible happens to you. Share your data with your family in a secure
+                    manner. Set it up such that at least x% of your family needs to come together
+                    to get access to the document.
+                </p>
+                <!-- svelte-ignore a11y-missing-attribute -->
+                <a class="text-red-500 inline-flex items-center">
+                    Learn More
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+                <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                    Tax Benefit Analyzer
+                </h2>
+                <p class="leading-relaxed text-base mb-4">
+                    We provide a tax-benefit analyser that will run on the client side, and you can
+                    without providing us access to your data, ensure you have taken advantage of all
+                    your tax benefit 
+                </p>
+                <!-- svelte-ignore a11y-missing-attribute -->
+                <a class="text-red-500 inline-flex items-center">
+                    Learn More
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <button class="flex mx-auto mt-16 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">
+            Join kanak
+        </button>
     </div>
-    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="">
-    </div>
-  </div>
+</section>

@@ -4,41 +4,27 @@
 
 <Head page_title="About" />
 
-<main>
-	<h1>About Kanak</h1>
-
-	<p>Made with ❤ in London</p>
-</main>
-<style style lang="postcss">
-	main {
-		@apply text-center;
-		@apply p-4;
-		@apply mx-auto;
-	}
-
-	h1 {
-		@apply text-red-600;
-		@apply uppercase;
-		@apply text-6xl;
-		@apply font-thin;
-		@apply leading-tight;
-		@apply my-16 mx-auto;
-		@apply max-w-xs;
-	}
-
-	p {
-		@apply max-w-xs;
-		@apply my-8 mx-auto;
-		@apply leading-snug;
-	}
-
-	@screen sm {
-		h1 {
-			@apply max-w-none;
-		}
-
-		p {
-			@apply max-w-none;
-		}
-	}
-</style>
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+                About Kanak
+            </h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+                This is the team behind kanak. Right now it is a single person effort,
+                with help and advice from many others.
+            </p>
+        </div>
+        <div class="flex flex-wrap -m-2">
+            <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                    <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/80x80">
+                    <div class="flex-grow">
+                        <h2 class="text-gray-900 title-font font-medium">Abhimanyu</h2>
+                        <p class="text-gray-500">Creator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
