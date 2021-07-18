@@ -3,9 +3,14 @@
 <script lang="ts">
     import { page } from '$app/stores';
     let showProfileDropdown= false;
+    let showMobileDropdown = false;
 
     const toggleViewState = () => {
         showProfileDropdown = !showProfileDropdown;
+    }
+
+    const toggleMobileViewState = () => {
+        showMobileDropdown = !showMobileDropdown;
     }
 
     let active = "home"
@@ -33,15 +38,17 @@
     <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <!-- Mobile menu button-->
-            <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+            <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" on:click={toggleMobileViewState}>
                 <span class="sr-only">Open main menu</span>
-
-                <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                {#if showMobileDropdown}
+                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                {:else}
+                <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
-                <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                {/if}
             </button>
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -78,17 +85,18 @@
         </div>
     </div>
     </div>
+    {#if showMobileDropdown}
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="sm:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="/" class={active === "home" ? selected_class_modifier: not_selected_class_modifier} >
+                    Home
+                </a>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1">
-            <a href="/" class={active === "home" ? selected_class_modifier: not_selected_class_modifier} >
-                Home
-            </a>
-
-            <a href="/about" class={active === "about" ? selected_class_modifier: not_selected_class_modifier}>
-                About
-            </a>
+                <a href="/about" class={active === "about" ? selected_class_modifier: not_selected_class_modifier}>
+                    About
+                </a>
+            </div>
         </div>
-    </div>
+    {/if}
 </nav>
