@@ -1,7 +1,10 @@
 <script lang="ts">
-    import Head from '$lib/common/Head.svelte';
-</script>
+    import Head from '$lib/components/common/Head.svelte';
+    import TempButtons from './temp_buttons.svelte';
 
+    import {count} from '$lib/stores/count';
+
+</script>
 <Head page_title="About" />
 
 <section class="text-gray-600 body-font">
@@ -13,7 +16,9 @@
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
                 This is the team behind kanak. Right now it is a single person effort,
                 with help and advice from many others.
+                The count is {$count}
             </p>
+            <TempButtons/>
         </div>
         <div class="flex flex-wrap -m-2">
             <div class="p-2 lg:w-1/3 md:w-1/2 w-full">

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Head from '$lib/common/Head.svelte';
+    import Head from '$lib/components/common/Head.svelte';
 </script>
 
 <Head page_title="Home" />
