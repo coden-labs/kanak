@@ -3,24 +3,47 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
+}
+
+
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
+  var _questions = [
+    "What do you want to do with this app?",
+    "Do you know how much you are worth?",
+    "Where do you live in terms of taxation?",
+  ];
+
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+      _questionIndex = _questionIndex % _questions.length;
+    });    
+  }
+
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      title: 'Welcome to Kanak',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Welcome to Flutter'),
+          title: const Text('Welcome to Kanak'),
         ),
-        body: Center(
-          child: Text(wordPair.asPascalCase),
-        ),
+        body: Column(children: [
+          Text(_questions[_questionIndex]),
+          RaisedButton(child: Text('Answer 1'), onPressed: _answerQuestion),
+          RaisedButton(child: Text('Answer 2'), onPressed: _answerQuestion),
+          RaisedButton(child: Text('Answer 3'), onPressed: _answerQuestion),
+        ]),
       ),
     );
   }
-} 
+}
