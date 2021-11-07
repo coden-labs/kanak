@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,61 +15,73 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
-  final _qanda = [
+  var _totalScore = 0;
+  final _qanda = const [
     {
-      "questionText": "What do you want to do with this app?",
+      "questionText": "What is your favourite colour?",
       "answers": [
-        "Budget my expenses",
-        "Track my investments",
-        "Plan my taxes",
-        "Pay off Debt",
-        "Other",
+        {"text": "Red", "score": 10},
+        {"text": "Black", "score": 5},
+        {"text": "White", "score": 3},
+        {"text": "Yellow", "score": 2},
       ]
     },
     {
-      "questionText": "Do you know how much you are worth",
+      "questionText": "What is your favourite animal?",
       "answers": [
-        "Yes, but I owe more than I have",
-        "Yes, but it is under 1 Million",
-        "Yes, and I have more than 1 Million",
-        "No",
-        "It is complicated",
-        "Other",
+        {"text": "Rhino", "score": 10},
+        {"text": "Elephant", "score": 5},
+        {"text": "Rat", "score": 20},
+        {"text": "Unicorn", "score": -20},
       ]
     },
     {
-      "questionText": "Where do you live in terms of taxation",
+      "questionText": "What is your favourite food?",
       "answers": [
-        "USA",
-        "UK",
-        "India",
-        "I am not a tax resident anywhere",
-        "Other",
+        {"text": "Katsu Curry", "score": 10},
+        {"text": "Sphagetti & Meat Balls", "score": 5},
+        {"text": "Sushi", "score": 3},
+        {"text": "Pizza", "score": 2},
       ]
     },
   ];
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
     setState(() {
-      _questionIndex = _questionIndex + 1;
-      _questionIndex = _questionIndex % _qanda.length;
+      // This increases the questionIndex to be equal to qanda's length. So that means
+      // at the end we have
+      if (_questionIndex < _qanda.length) {
+        _questionIndex = _questionIndex + 1;
+        _totalScore += score;
+      }
+    });
+  }
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget displayWidget = Result(_totalScore, _resetQuiz);
+
+    if (_questionIndex < _qanda.length) {
+      displayWidget = Quiz(
+          qanda: _qanda,
+          questionIndex: _questionIndex,
+          answerQuestion: _answerQuestion);
+    }
+
     return MaterialApp(
       title: 'Welcome to Kanak',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Welcome to Kanak'),
         ),
-        body: Column(children: [
-          Question(_qanda[_questionIndex]["questionText"] as String),
-          ...(_qanda[_questionIndex]["answers"] as List<String>).map((answer) {
-            return Answer(answer, _answerQuestion);
-          }).toList(),
-        ]),
+        body: displayWidget,
       ),
     );
   }
