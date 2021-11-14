@@ -1,28 +1,25 @@
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+#![feature(proc_macro_hygiene, decl_macro)]
 
-#[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
+#[macro_use] extern crate rocket;
+
+use rocket::tokio::time::{sleep, Duration};
+
+
+#[get("/world")]
+fn world() -> &'static str {
+    "hello, world!"
 }
 
-#[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
+#[get("/delay/<seconds>")]
+async fn delay(seconds: u64) -> String {
+    sleep(Duration::from_secs(seconds)).await;
+    format!("Waited for {} seconds", seconds)
 }
 
-async fn manual_hello() -> impl Responder {
-    HttpResponse::Ok().body("Hey there!")
-}
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(hello)
-            .service(echo)
-            .route("/hey", web::get().to(manual_hello))
-    })
-    .bind("127.0.0.1:8080")?
-    .run()
-    .await
+#[launch]
+async fn rocket() -> rocket::Rocket<rocket::Build> {
+    rocket::build()
+        .mount("/hello", routes![world])
+        .mount("/do", routes![delay])
 }
