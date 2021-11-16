@@ -3,9 +3,13 @@ name = "market"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name="market_lib"
+path="src/lib.rs"
+
 [[bin]]
-name="price-updater"
-path="src/bin/price-updater/main.rs"
+name="price_updater"
+path="src/bin/price_updater/main.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -13,5 +17,6 @@ path="src/bin/price-updater/main.rs"
 rocket = "0.5.0-rc.1"
 futures = "0.3"
 async-std = "1.10.0"
-diesel = { version = "1.4.8", features = ["postgres"] }
+diesel = { version = "1.4.8", features = ["postgres", "uuidv07"] }
 dotenv = "0.15.0"
+uuid = { version = "0.8.2", features = ["serde", "v4"] }
