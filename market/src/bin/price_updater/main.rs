@@ -1,6 +1,3 @@
-use std::time::Duration;
-use async_std::task;
-
 use diesel::prelude::*;
 use market_lib::models::stock_asset::StockAsset;
 use market_lib::models::stock_price::StockPrice;

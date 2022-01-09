@@ -23,10 +23,10 @@ impl StockPrice{
     pub fn from_av_time_response(av_time_response: AVTimeResponse, stock_asset: StockAsset) -> Vec<StockPrice> {
         let stock_prices: Vec<StockPrice> = Vec::new();
         let time_series = av_time_response.time_series_daily;
-        for (date_string, stock_price_info) in time_series.iter() {
+        for (date_string, stock_price_info) in &time_series {
             print!("The stock price for {} on {} date - ", stock_asset.query_symbol, date_string);
             for (k, v) in stock_price_info.iter() {
-                print!("{} is {}", k, v);
+                print!("{} is {},", k, v);
             }
             print!("\n");
         }
