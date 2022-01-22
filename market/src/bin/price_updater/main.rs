@@ -1,7 +1,7 @@
 use diesel::prelude::*;
 use market_lib::models::stock_asset::StockAsset;
 use market_lib::models::stock_price::StockPrice;
-use market_lib::utils::alpha_vantage::query_daily_time_adjusted;
+use market_lib::utils::alpha_vantage::query_daily_time_unadjusted;
 
 
 mod setup;
@@ -22,10 +22,13 @@ async fn update_prices() {
 
     for stock in results {
         println!("{} at {} queried as {}", stock.symbol, stock.exchange, stock.query_symbol);
-        let response = query_daily_time_adjusted(&stock.query_symbol, &api_key).await;
+        let response = query_daily_time_unadjusted(&stock.query_symbol, &api_key).await;
         match response {
             Ok(av_time_response) => {
-                StockPrice::from_av_time_response(av_time_response, stock);
+                let stock_prices = StockPrice::from_av_time_response(av_time_response, &stock, false);
+                for stock_price in stock_prices {
+                    stock_price.print_info();
+                }
             }
             Err(e) => {
                 println!("We were unable to get {} stock details because {}", stock.query_symbol, e);

@@ -14,7 +14,7 @@ async fn raw_query(api_method: &String, query_symbol: &String, api_key: &String)
     Ok(response)
 }
 
-pub async fn query_daily_time_adjusted(query_symbol: &String, api_key: &String) -> Result<AVTimeResponse, Box<dyn std::error::Error>> {
+pub async fn query_daily_time_unadjusted(query_symbol: &String, api_key: &String) -> Result<AVTimeResponse, Box<dyn std::error::Error>> {
     let method = String::from("TIME_SERIES_DAILY");
     let response = raw_query(&method, &query_symbol, &api_key).await?;
     Ok(response)
