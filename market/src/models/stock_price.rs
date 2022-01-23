@@ -11,15 +11,15 @@ pub struct StockPrice{
     pub id: Option<uuid::Uuid>,
     pub query_symbol: String,
     pub stock_asset_id: uuid::Uuid,
-    pub date: NaiveDate,
-    pub adjusted_open: Option<f64>,
-    pub adjusted_high: Option<f64>,
-    pub adjusted_low: Option<f64>,
-    pub adjusted_close: Option<f64>,
-    pub open: Option<f64>,
-    pub high: Option<f64>,
-    pub low: Option<f64>,
-    pub close: Option<f64>,
+    pub price_date: NaiveDate,
+    pub adjusted_open_price: Option<f64>,
+    pub adjusted_high_price: Option<f64>,
+    pub adjusted_low_price: Option<f64>,
+    pub adjusted_close_price: Option<f64>,
+    pub open_price: Option<f64>,
+    pub high_price: Option<f64>,
+    pub low_price: Option<f64>,
+    pub close_price: Option<f64>,
     pub is_adjusted: bool,
 }
 
@@ -30,22 +30,26 @@ impl StockPrice{
             id: None,
             query_symbol: stock_asset.query_symbol.clone(),
             stock_asset_id: stock_asset.id.clone(),
-            date: NaiveDate::parse_from_str(date_string, "%Y-%m-%d").ok()?,
-            open: Some(stock_price_info["1. open"].parse::<f64>().unwrap()),
-            high: Some(stock_price_info["2. high"].parse::<f64>().unwrap()),
-            low: Some(stock_price_info["3. low"].parse::<f64>().unwrap()),
-            close: Some(stock_price_info["4. close"].parse::<f64>().unwrap()),
-            adjusted_open: None,
-            adjusted_low: None,
-            adjusted_high: None,
-            adjusted_close: None,
+            price_date: NaiveDate::parse_from_str(date_string, "%Y-%m-%d").ok()?,
+            open_price: Some(stock_price_info["1. open"].parse::<f64>().unwrap()),
+            high_price: Some(stock_price_info["2. high"].parse::<f64>().unwrap()),
+            low_price: Some(stock_price_info["3. low"].parse::<f64>().unwrap()),
+            close_price: Some(stock_price_info["4. close"].parse::<f64>().unwrap()),
+            adjusted_open_price: None,
+            adjusted_low_price: None,
+            adjusted_high_price: None,
+            adjusted_close_price: None,
             is_adjusted: is_adjusted,
         };
         // TODO(@abhimanyuma): Add code to add ajusted data.
         Some(stock_price)
     }
     pub fn print_info(&self) {
-        println!("The OHLC for {} on {} was O-{:?}, H-{:?}, L-{:?}, C-{:?}", self.query_symbol, self.date, self.open, self.high, self.low, self.close)
+        println!(
+            "The OHLC for {} on {} was O-{:?}, H-{:?}, L-{:?}, C-{:?}", 
+            self.query_symbol, self.price_date, 
+            self.open_price, self.high_price, self.low_price, self.close_price
+        )
     }
 }
 
