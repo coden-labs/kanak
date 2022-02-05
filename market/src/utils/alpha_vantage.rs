@@ -1,3 +1,4 @@
+use log;
 
 use crate::utils::response_dto::AVTimeResponse;
 
@@ -9,7 +10,7 @@ async fn raw_query(api_method: &String, query_symbol: &String, api_key: &String)
         query_symbol = query_symbol,
         api_key = api_key
     );
-    println!("Querying {}", request_url);
+    log::info!("Querying {}", request_url);
     let response = reqwest::get(&request_url).await?.json::<AVTimeResponse>().await?;
     Ok(response)
 }

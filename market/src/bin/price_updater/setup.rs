@@ -19,3 +19,10 @@ pub fn get_api_key() -> String {
     let api_key = env::var("ALPHA_VANTAGE_KEY").expect("must be set");
     api_key
 }
+
+pub fn get_log_level() -> String {
+    dotenv().ok();
+
+    let log_level = env::var("LOG_LEVEL").expect("must be set");
+    log_level
+}

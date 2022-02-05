@@ -1,4 +1,8 @@
+use log;
+use env_logger::Builder;
+
 use diesel::prelude::*;
+
 use market_lib::models::stock_assets::StockAsset;
 use market_lib::models::stock_prices::StockPrice;
 use market_lib::utils::alpha_vantage::query_daily_time_unadjusted;
@@ -19,10 +23,10 @@ async fn update_prices() {
         .load::<StockAsset>(&connection)
         .expect("Error loading stock assets");
 
-    println!("Displaying {} stock assets", results.len());
+    log::info!("Displaying {} stock assets", results.len());
 
     for stock in results {
-        println!("{} at {} queried as {}", stock.symbol, stock.exchange, stock.query_symbol);
+        log::info!("{} at {} queried as {}", stock.symbol, stock.exchange, stock.query_symbol);
         let response = query_daily_time_unadjusted(&stock.query_symbol, &api_key).await;
         match response {
             Ok(av_time_response) => {
@@ -33,17 +37,23 @@ async fn update_prices() {
                         .on_conflict_do_nothing()
                         .execute(&connection);
                     match inserted_prices {
-                        Ok(size) => {
-                            println!("Inserted as many value {}", size);
+                        Ok(0) => {
+                            log::info!("Value of {} on {} date was not inserted likely on conflict", stock_price.query_symbol, stock_price.price_date);
+                        }
+                        Ok(1) => {
+                            log::info!("Inserted {} on {}", stock_price.query_symbol, stock_price.price_date);
+                        }
+                        Ok(_size) => {
+                            log::error!("Inserted more values than expected for {} on {}", stock_price.query_symbol, stock_price.price_date);
                         }
                         Err(e) => {
-                            println!("We were unable to insert {} stock details because {}", stock_price.query_symbol, e);
+                            log::error!("We were unable to insert {} stock details because {}", stock_price.query_symbol, e);
                         }
                     }
                 }
             }
             Err(e) => {
-                println!("We were unable to get {} stock details because {}", stock.query_symbol, e);
+                log::error!("We were unable to get {} stock details because {}", stock.query_symbol, e);
 
             }
         };
@@ -52,5 +62,10 @@ async fn update_prices() {
 
 #[tokio::main]
 async fn main() {
+
+    let log_level = setup::get_log_level();
+    Builder::new()
+        .parse_filters(&log_level).init();
+
     update_prices().await;
 }
