@@ -3,10 +3,13 @@ use std::collections::HashMap;
 
 use chrono::NaiveDate;
 
-use crate::models::stock_asset::StockAsset;
+use crate::models::stock_assets::StockAsset;
 use crate::utils::response_dto::AVTimeResponse;
 
-#[derive(Queryable)]
+use crate::schema::stock_prices;
+
+#[derive(Queryable, Insertable)]
+#[table_name="stock_prices"]
 pub struct StockPrice{
     pub id: Option<uuid::Uuid>,
     pub query_symbol: String,

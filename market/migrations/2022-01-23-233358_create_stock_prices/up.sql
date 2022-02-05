@@ -11,7 +11,7 @@ CREATE TABLE stock_prices (
   high_price double precision,
   low_price double precision,
   close_price double precision,
-  is_adjsted boolean NOT NULL,
+  is_adjusted boolean NOT NULL,
   CONSTRAINT fk_stock_assets FOREIGN KEY(stock_asset_id) REFERENCES stock_assets(id),
   UNIQUE(stock_asset_id, price_date)
 );

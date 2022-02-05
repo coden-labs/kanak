@@ -25,7 +25,7 @@ table! {
         high_price -> Nullable<Float8>,
         low_price -> Nullable<Float8>,
         close_price -> Nullable<Float8>,
-        is_adjsted -> Bool,
+        is_adjusted -> Bool,
     }
 }
 

@@ -1,2 +1,2 @@
-pub mod stock_asset;
-pub mod stock_price;
+pub mod stock_assets;
+pub mod stock_prices;
