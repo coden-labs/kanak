@@ -5,14 +5,19 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      title: 'Welcome to Kanak',
+      title: 'Kanak',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Welcome to Kanak'),
+          title: const Text('Kanak'),
+
         ),
-        body: Center(
-          child: Text('Your finances taken care of'),
+        body: Container(
+          child:
+            Center(
+              child: Text('Your finances taken care of'),
+            ),
         ),
       ),
     );
